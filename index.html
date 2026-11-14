@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6e42a6">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Güzelime | İyi ki varsın</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+  <style>
+    /* Giriş Paneli Tasarımı - Sitenin mor temasına uygun ayarlandı */
+    #login-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #6e42a6 0%, #b19ffb 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 999999;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: white;
+        transition: opacity 0.5s ease;
+    }
+
+    .login-box {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 40px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        max-width: 320px;
+        width: 90%;
+    }
+
+    .login-box h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .login-box input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 25px;
+        outline: none;
+        text-align: center;
+        font-size: 16px;
+        box-sizing: border-box;
+        background: white;
+        color: #333;
+    }
+
+    .login-box button {
+        background: #fff;
+        color: #6e42a6;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.2s, background 0.2s;
+        width: 100%;
+    }
+
+    .login-box button:hover {
+        transform: scale(1.03);
+        background: #f8f8f8;
+    }
+
+    #error-msg {
+        color: #ffe0e5;
+        font-size: 14px;
+        margin-top: 10px;
+        display: none;
+        font-weight: 500;
+    }
+
+    /* Giriş yapılana kadar ana içeriği tamamen gizler */
+    #main-content {
+        display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. GİRİŞ EKRANI PANELİ -->
+  <div id="login-overlay">
+    <div class="login-box">
+        <h2>Giriş Şifresi ❤️</h2>
+        <input type="password" id="password-input" placeholder="Şifreyi yaz aşkım...">
+        <button onclick="checkPassword()">Giriş Yap</button>
+        <div id="error-msg">Hatalı şifre girdin birtanem! 🙈</div>
+    </div>
+  </div>
+
+  <!-- 2. ASIL WEB SİTESİ İÇERİĞİ -->
+  <div id="main-content">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Ana sayfa">sevdiğim <span>kadına</span> <span aria-hidden="true">♡</span></a>
+      <nav aria-label="Ana navigasyon">
+        <a class="active" href="index.html" aria-current="page">Başlangıç</a>
+        <a href="mutluluklar.html">Sana dair</a>
+        <a href="mektup.html">Bir mektup</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Bu küçük köşe, sana…</p>
+        <h1>İyi ki varsın,<br><span>güzelim.</span></h1>
+        <p class="intro">Bebişim, tosunum, güzelim… Sana söylemek istediğim güzel şeyler için minicik bir yer hazırladım.</p>
+        <a class="button" href="mutluluklar.html">Hadi başlayalım <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="hero-message">Sevgilim<br><span>Esra'ya</span></div>
+        <span class="spark spark-one">✦</span>
+        <span class="spark spark-two">✧</span>
+        <span class="spark spark-three">✦</span>
+      </div>
+      <p class="hero-note">Senin için, sevgiyle <span aria-hidden="true">♥</span></p>
+    </main>
+
+    <footer class="site-footer">Morların en güzeli, sana yakışan. <span aria-hidden="true">♡</span></footer>
+  </div>
+
+  <!-- 3. ŞİFRE KONTROLÜNÜ SAĞLAYAN GİZLENMİŞ SCRIPT -->
+  <script>
+    function checkPassword() {
+        const input = document.getElementById("password-input").value.toLocaleLowerCase('tr-TR').trim();
+        const error = document.getElementById("error-msg");
+        const overlay = document.getElementById("login-overlay");
+        const mainContent = document.getElementById("main-content");
+
+        // "esra" şifresinin şifrelenmiş güvenli hali
+        if (btoa(unescape(encodeURIComponent(input))) === "ZXNyYQ==") {
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.style.display = "none";
+                mainContent.style.display = "block";
+            }, 500);
+        } else {
+            error.style.display = "block";
+            document.getElementById("password-input").value = "";
+        }
+    }
+
+    document.getElementById("password-input").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            checkPassword();
+        }
+    });
+  </script>
+</body>
+</html>
